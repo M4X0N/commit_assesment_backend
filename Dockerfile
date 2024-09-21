@@ -14,4 +14,3 @@ ENV FLASK_RUN_HOST 0.0.0.0
 EXPOSE 8000
 
 CMD ["flask", "run"]
-# CMD /bin/sh
