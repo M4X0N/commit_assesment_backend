@@ -3,7 +3,7 @@ from flask import Flask
 
 
 class DBManager:
-    def __init__(self, database='commit_example_db', host="db", user="admin", password_file=None):
+    def __init__(self, database='commit_assesment_db', host="db", user="admin", password_file=None):
         pf = open(password_file, 'r')
         self.connection = mysql.connector.connect(
             user=user,
