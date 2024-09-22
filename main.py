@@ -22,14 +22,16 @@ class DBManager:
         self.cursor.execute(
             'CREATE TABLE blog (id INT AUTO_INCREMENT PRIMARY KEY, title VARCHAR(255))')
         self.cursor.executemany('INSERT INTO blog (id, title) VALUES (%s, %s);', [
-                                (i, 'Blog post #%d' % i) for i in range(1, 5)])
+                                (i, 'Blog post #%d' % i) for i in range(1, 10)])
         self.connection.commit()
 
     def query_titles(self):
         self.cursor.execute('SELECT title FROM blog')
         rec = []
         for c in self.cursor:
+            print(c)
             rec.append(c[0])
+
         return rec
 
 
