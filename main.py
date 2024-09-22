@@ -43,7 +43,7 @@ def listBlog():
         conn.populate_db()
     rec = conn.query_titles()
 
-    response = "<img src = logo.jpg width = '100' length = '100'>"
+    response = "<img src = /code/logo.jpg width = '100' length = '100'>"
     response += '\n<h1>Hello Commit</h1>\n<p>from Max Rogol</p>'
     for c in rec:
         response = response + '<div> record: ' + c + '</div>'
