@@ -1,5 +1,7 @@
+import os
+
 import mysql.connector
-from flask import Flask
+from flask import Flask, render_template, url_for
 
 
 class DBManager:
@@ -37,17 +39,23 @@ conn = None
 
 @server.route('/')
 def listBlog():
-    global conn
-    if not conn:
-        conn = DBManager(password_file='/conf/db-password')
-        conn.populate_db()
-    rec = conn.query_titles()
+    if os.path.exists("/conf/db-password"):
+        global conn
+        if not conn:
+            conn = DBManager(password_file='/conf/db-password')
+            conn.populate_db()
+        rec = conn.query_titles()
 
-    response = "<img src = /code/logo.jpg width = '100' length = '100'>"
-    response += '\n<h1>Hello Commit</h1>\n<p>from Max Rogol</p>'
-    for c in rec:
-        response = response + '<div> record: ' + c + '</div>'
-    return response
+        db_data = ""
+        for c in rec:
+            db_data += '\n<div> record: ' + c + '</div>'
+
+    return render_template('template.html')
+
+
+@server.route('/logo.jpg')
+def get_image():
+    return send_file("/code/logo.jpg", mimetype='image/gif')
 
 
 if __name__ == '__main__':
