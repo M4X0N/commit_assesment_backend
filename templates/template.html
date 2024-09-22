@@ -1,10 +1,12 @@
 <!DOCTYPE html>
 <html lang="en">
 <body>
-    <img src="{{url_for('static', filename='logo.jpg')}}" />
+    <img style="max-width: 50px; max-height: 50px" src="{{url_for('static', filename='logo.jpg')}}" />
     <h1>Hello Commit</h1>
     <p>from Max Rogol</p>
     <h2>Some data from database:</h2>
-    <div>"{{db_data}}"
+    {% for record in db_data %} 
+    <p>{{ record }}</p>
+    {% endfor %}
 </body>
 </html>

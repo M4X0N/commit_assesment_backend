@@ -39,6 +39,7 @@ conn = None
 
 @server.route('/')
 def listBlog():
+    db_data = []
     if os.path.exists("/conf/db-password"):
         global conn
         if not conn:
@@ -46,16 +47,15 @@ def listBlog():
             conn.populate_db()
         rec = conn.query_titles()
 
-        db_data = ""
         for c in rec:
-            db_data += '\n<div> record: ' + c + '</div>'
+            db_data.append(f'record: {c}')
+    else:
+        for c in range(5):
+            db_data.append(f'record: {c}')
 
-    return render_template('template.html')
+    print(db_data)
 
-
-@server.route('/logo.jpg')
-def get_image():
-    return send_file("/code/logo.jpg", mimetype='image/gif')
+    return render_template('template.html', db_data=db_data)
 
 
 if __name__ == '__main__':
